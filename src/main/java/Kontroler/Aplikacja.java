@@ -22,9 +22,9 @@ public class Aplikacja {
         app.zarzadzanieLotami();
         app.rezerwujBilety(123, 2);
     }
-    private ArrayList<Lot> katalogLotow = new ArrayList<>();
+    ArrayList<Lot> katalogLotow = new ArrayList<>();
     private SystemLogowania sesjaUzytkownika = new SystemLogowania();
-    private ArrayList<PotwierdzenieZamowienia> historiaZamowien = new ArrayList<>();
+    ArrayList<PotwierdzenieZamowienia> historiaZamowien = new ArrayList<>();
     private Zamowienie realizowaneZamowienie;
 
     public Aplikacja(){}
@@ -47,10 +47,6 @@ public class Aplikacja {
                                 "11223344556", TypBiletu.PARKINGOWY,"DWASDXD", new Date(), new Date(225, 10, 20), '0');
                         zamowioneBilety.add(biletPark);
                     }
-                }
-                //to dla testów:
-                for (Bilet b:zamowioneBilety) {
-                    System.out.println(b.toString());
                 }
 
                 realizowaneZamowienie = new Zamowienie(zamowioneBilety);
@@ -142,10 +138,25 @@ public class Aplikacja {
     private void wyswietlMenuZarzadzania(String loggedAs){
         System.out.println("0 - wyloguj, 1 - dodaj lot, 2 - wyszukaj lot, 3 - edytuj lot");
     }
-    private boolean sprawdzPoprawnoscDanychLot(String[] informacjeDoWeryfikacji){return true;}
-    private ArrayList<Lot> wyszukajLotParametr(String parametrWyszukiwania){
+    boolean sprawdzPoprawnoscDanychLot(String[] informacjeDoWeryfikacji){
+        if (informacjeDoWeryfikacji[0] == "123" && informacjeDoWeryfikacji[1] == "Wroclaw"
+                && informacjeDoWeryfikacji[2] == "Moskwa"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    ArrayList<Lot> wyszukajLotParametr(String parametrWyszukiwania){
         if (!katalogLotow.isEmpty()){
-            return katalogLotow;
+            ArrayList<Lot> znalezione = new ArrayList<>();
+            for(int i = 0; i < katalogLotow.size(); i++){
+                int nr = katalogLotow.get(i).getNrLotu();
+                if (nr == Integer.parseInt(parametrWyszukiwania)){
+                    znalezione.add(katalogLotow.get(i));
+                }
+            }
+            return znalezione;
         }
         return null;}
     private boolean dodajLot(String[] dane){return false;} //chyba niepotrzebne?
@@ -154,6 +165,18 @@ public class Aplikacja {
             System.out.println(l.toString());
         }
     }
-    private boolean edytujLot(int nrLotu, String parametr, String wartosc){return true;}
+    boolean edytujLot(int nrLotu, String parametr, String wartosc){
+        for(int i = 0; i < katalogLotow.size(); i++){
+            if (katalogLotow.get(i).getNrLotu() == nrLotu){
+                if (parametr == "nrLotu"){
+                    String dane[] = {wartosc, katalogLotow.get(i).getLotniskoPoczatkowe(), katalogLotow.get(i).getLotniskoDocelowe()};
+                    Lot nowy = new Lot(dane);
+                    katalogLotow.set(i, nowy);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     private void wyswietlBlad(String komunikat){}
 }
