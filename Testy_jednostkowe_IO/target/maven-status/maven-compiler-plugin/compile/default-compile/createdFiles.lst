@@ -1,0 +1,15 @@
+Model\Bilety\Bilet.class
+Model\Bilety\RodzajBagazu.class
+Model\Rezerwacja\Zamowienie.class
+Model\Bilety\TypBiletu.class
+Model\Rezerwacja\Zamowienie$1.class
+Testy_jednostkowe_IO.class
+Model\Bilety\BiletParkingowy.class
+Model\Lot.class
+Model\Rezerwacja\WynikPlatnosci.class
+Model\Bilety\BiletLotniczy.class
+Model\SystemLogowania.class
+Model\Rezerwacja\PotwierdzenieZamowienia.class
+Kontroler\Aplikacja.class
+Model\Rezerwacja\SystemPlatnosci$1.class
+Model\Rezerwacja\SystemPlatnosci.class
